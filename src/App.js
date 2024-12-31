@@ -31,12 +31,12 @@ function App() {
   };
   return (
     <div className="App">
-      <header class="header">
-        <div class="header-container">
-          <h1 class="title">
-            Task<span class="highlight">Buddy</span>
+      <header className="header">
+        <div className="header-container">
+          <h1 className="title">
+            Task<span className="highlight">Buddy</span>
           </h1>
-          <p class="tagline">Your friendly task manager</p>
+          <p className="tagline">Your friendly task manager</p>
         </div>
       </header>
       <TaskForm addTask={addTask} />
