@@ -1,35 +1,29 @@
-function TaskList({ tasks, toggleComplete, deleteTask }) {
+import React from "react";
+function TaskList({ tasks, updateTask, deleteTask }) {
+  const toggleComplete = (index) => {
+    const updatedTask = { ...tasks[index], completed: !tasks[index].completed };
+    updateTask(index, updatedTask);
+  };
   return (
-    <div className="task-list">
-      {" "}
-      {tasks.length === 0 ? (
-        <p>No tasks available. Add some tasks! </p>
-      ) : (
-        tasks.map((task, index) => (
-          <div key={index} className="task-item">
-            <div className="task-info">
-              <p className={task.completed ? "completed" : ""}>{task.text}</p>
-              <span className="priority"> {task.priority}</span>
-              <span className="category"> {task.category}</span>
-            </div>
-            <div className="task-actions">
-              {" "}
-              <button
-                onClick={() => toggleComplete(index)}
-                className="complete-btn"
-              >
-                {" "}
-                {task.completed ? "Undo" : "Complete"}
-              </button>
-              <button onClick={() => deleteTask(index)} className="delete-btn">
-                {" "}
-                Delete{" "}
-              </button>{" "}
-            </div>{" "}
+    <ul className="task-list">
+      {tasks.map((task, index) => (
+        <li key={index} className={task.completed ? "completed" : ""}>
+          <div>
+            <span>{task.text}</span>
+            <small>
+              ({task.priority}, {task.category})
+            </small>
           </div>
-        ))
-      )}{" "}
-    </div>
+          <div>
+            <button onClick={() => toggleComplete(index)}>
+              {task.completed ? "Undo" : "Complete"}
+            </button>
+            <button onClick={() => deleteTask(index)}>Delete</button>
+          </div>
+        </li>
+      ))}
+    </ul>
   );
 }
+
 export default TaskList;

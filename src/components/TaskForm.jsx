@@ -1,49 +1,45 @@
 import React, { useState } from "react";
-function TaskForm({ addTask }) {
+
+export default function TaskForm({ addTask }) {
   const [task, setTask] = useState("");
   const [priority, setPriority] = useState("Medium");
   const [category, setCategory] = useState("General");
-  const handleSubmit = (e) => {
+  const handlesubmit = (e) => {
     e.preventDefault();
-    if (task.trim()) {
-      addTask({ text: task, priority, category, completed: false });
-      setTask("");
-      setPriority("Medium");
-      setCategory("General");
-    }
+    addTask({ text: task, priority, category, completed: false }); //send data to addTask()
+    //Reset state
+    setPriority("Medium");
+    setCategory("General");
+    setTask("");
   };
   return (
-    <form onSubmit={handleSubmit} className="task-form">
-      {" "}
-      <div id="vishnu">
-        {" "}
+    <form onSubmit={handlesubmit} className="task-form">
+      <div id="inp">
         <input
           type="text"
+          placeholder="Enter Your Task"
+          required
           value={task}
           onChange={(e) => setTask(e.target.value)}
-          placeholder="Enter your task"
-          required
-        />{" "}
+        />
         <span>
-          <button type="submit">Add Task</button>
-        </span>{" "}
-      </div>{" "}
-      <div id="btns">
-        {" "}
+          <button>Add Tasks</button>
+        </span>
+      </div>
+
+      <div className="btns">
         <select value={priority} onChange={(e) => setPriority(e.target.value)}>
-          {" "}
-          <option value="High">High</option>{" "}
-          <option value="Medium">Medium</option>{" "}
-          <option value="Low">Low</option>{" "}
-        </select>{" "}
+          <option>Medium</option>
+          <option>Low</option>
+          <option>High</option>
+        </select>
+
         <select value={category} onChange={(e) => setCategory(e.target.value)}>
-          {" "}
-          <option value="General">General</option>{" "}
-          <option value="Work">Work</option>{" "}
-          <option value="Personal">Personal</option>{" "}
-        </select>{" "}
-      </div>{" "}
+          <option>General</option>
+          <option>Work</option>
+          <option>Personal</option>
+        </select>
+      </div>
     </form>
   );
 }
-export default TaskForm;
